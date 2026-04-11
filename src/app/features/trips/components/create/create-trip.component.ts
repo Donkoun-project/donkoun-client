@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { AuthService } from '../../../auth/services/service-auth.service';
 
 @Component({
+  standalone: false,
   selector: 'app-create-trip',
   templateUrl: './create-trip.component.html',
   styleUrls: ['./create-trip.component.scss']

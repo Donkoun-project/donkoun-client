@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-not-found',
   template: `
     <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">

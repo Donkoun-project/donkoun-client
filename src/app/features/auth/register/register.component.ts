@@ -6,6 +6,7 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']

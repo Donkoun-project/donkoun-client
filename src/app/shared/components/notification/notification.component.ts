@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
+  standalone: false,
   selector: 'app-notification',
   template: `
     <div class="fixed top-4 right-4 z-50 space-y-2">

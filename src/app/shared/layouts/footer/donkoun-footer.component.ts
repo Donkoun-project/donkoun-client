@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NewsletterService } from '../../services/newsletter.service';
 
 @Component({
+  standalone: false,
   selector: 'app-donkoun-footer',
   templateUrl: './donkoun-footer.component.html',
   styleUrls: ['./donkoun-footer.component.scss']

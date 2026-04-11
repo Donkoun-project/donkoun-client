@@ -6,6 +6,7 @@ import { TokenService } from 'src/app/shared/token.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
+  standalone: false,
   selector: 'app-mon-profil',
   templateUrl: './mon-profil.component.html',
   styleUrls: ['./mon-profil.component.scss']

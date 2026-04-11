@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/shared/token.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
+  standalone: false,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

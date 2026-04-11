@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/features/auth/services/service-auth.service
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
+  standalone: false,
   selector: 'app-donkoun-banner',
   templateUrl: './donkoun-banner.component.html',
   styleUrls: ['./donkoun-banner.component.scss']

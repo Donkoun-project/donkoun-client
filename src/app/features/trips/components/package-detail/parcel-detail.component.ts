@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITrip } from '../../models/ITrip';
 
 @Component({
+  standalone: false,
   selector: 'app-parcel-detail',
   templateUrl: './parcel-detail.component.html',
   styleUrls: ['./parcel-detail.component.scss']

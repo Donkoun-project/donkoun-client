@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/features/auth/services/service-auth.service
 import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
+  standalone: false,
   selector: 'app-donkoun-header',
   templateUrl: './donkoun-header.component.html',
   styleUrls: ['./donkoun-header.component.scss']

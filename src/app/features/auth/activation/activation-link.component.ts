@@ -4,6 +4,7 @@ import { AuthService } from '../services/service-auth.service';
 import { SharedService } from '../../../shared/shared.service';
 
 @Component({
+  standalone: false,
   selector: 'app-activation-link',
   templateUrl: './activation-link.component.html',
   styleUrls: ['./activation-link.component.scss']
