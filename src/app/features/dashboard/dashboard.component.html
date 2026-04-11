@@ -1,0 +1,148 @@
+<div class="dash-page">
+
+  <!-- Header -->
+  <div class="dash-header">
+    <div>
+      <h1 class="dash-title">Tableau de bord</h1>
+      <p class="dash-sub">Suivez l'activité de vos trajets</p>
+    </div>
+    <button class="refresh-btn" (click)="refreshData()" [disabled]="loading" title="Actualiser">
+      <i class="fas fa-sync-alt" [class.spinning]="loading"></i>
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="state-box">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error && !loading" class="state-box">
+    <div class="auth-alert auth-alert--error">
+      <i class="fas fa-exclamation-circle"></i> {{ error }}
+    </div>
+    <button class="refresh-btn" style="margin-top:1rem" (click)="refreshData()">Réessayer</button>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && !error" class="dash-content">
+
+    <!-- Stat cards -->
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-icon-wrap">
+          <i class="fas fa-route"></i>
+        </div>
+        <div class="stat-body">
+          <span class="stat-value">{{ totalTrips }}</span>
+          <span class="stat-label">Total des trajets</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon-wrap stat-icon-wrap--blue">
+          <i class="fas fa-list"></i>
+        </div>
+        <div class="stat-body">
+          <span class="stat-value">{{ getDisplayedTrips().length }}</span>
+          <span class="stat-label">{{ (selectedStatus && selectedStatus !== '') ? 'Trajets filtrés' : 'Trajets récents' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main grid -->
+    <div class="dash-grid">
+
+      <!-- Trips list -->
+      <div class="dash-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">{{ getSectionTitle() }}</h2>
+          <span class="count-badge">{{ getDisplayedTrips().length }}</span>
+        </div>
+
+        <div *ngIf="getDisplayedTrips().length === 0" class="empty-state">
+          <i class="fas fa-box-open empty-icon"></i>
+          <p>{{ (selectedStatus && selectedStatus !== '') ? 'Aucun trajet avec ce statut' : 'Aucun trajet trouvé' }}</p>
+        </div>
+
+        <div *ngIf="getDisplayedTrips().length > 0" class="trips-list">
+          <div
+            *ngFor="let trip of getDisplayedTrips(); trackBy: trackByTripId"
+            class="trip-card"
+            [ngClass]="getStatusClass(trip.status)">
+
+            <div class="trip-top">
+              <div class="trip-route">
+                <span class="route-city">{{ trip.departureCity | capitalize }}</span>
+                <i class="fas fa-arrow-right route-arrow"></i>
+                <span class="route-city">{{ trip.arrivalCity | capitalize }}</span>
+              </div>
+              <span class="status-badge" [ngClass]="getStatusClass(trip.status)">
+                {{ getStatusLabel(trip.status) }}
+              </span>
+            </div>
+
+            <div class="trip-meta">
+              <div class="meta-item">
+                <span class="meta-label">Départ</span>
+                <span class="meta-value">{{ formatDate(trip.departureDate) }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Prix</span>
+                <span class="meta-value">{{ trip.pricePerKg }} {{ trip.currency }}/{{ trip.unit }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Dispo.</span>
+                <span class="meta-value">{{ trip.availableQuantity }} {{ trip.unit }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">ID</span>
+                <span class="meta-value">#{{ trip.id }}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats by status -->
+      <div class="dash-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Répartition par statut</h2>
+          <select
+            class="status-select"
+            [(ngModel)]="selectedStatus"
+            (change)="onStatusChange($event)">
+            <option value="">Tous les statuts</option>
+            <option *ngFor="let statusCode of getStatusOptions()" [value]="statusCode">
+              {{ getStatusLabelForOption(statusCode) }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="tripStats.length === 0" class="empty-state">
+          <i class="fas fa-chart-bar empty-icon"></i>
+          <p>Aucune donnée disponible</p>
+        </div>
+
+        <div *ngIf="tripStats.length > 0" class="stats-list">
+          <div *ngFor="let stat of tripStats; trackBy: trackByStatus" class="stats-row">
+            <div class="stats-row-top">
+              <span class="stats-status-name">{{ getStatusLabel(stat.status) }}</span>
+              <span class="stats-count">{{ stat.count }}</span>
+            </div>
+            <div class="progress-track">
+              <div
+                class="progress-fill"
+                [ngClass]="getStatusClass(stat.status)"
+                [style.width.%]="stat.percentage">
+              </div>
+            </div>
+            <span class="stats-pct">{{ stat.percentage }}%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

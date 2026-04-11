@@ -1,0 +1,72 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a routerLink="/" class="footer-logo">Donkoun</a>
+        <p class="footer-desc">Connectez-vous avec des voyageurs de confiance pour envoyer vos colis partout dans le monde.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- Liens rapides -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a routerLink="/">Accueil</a></li>
+          <li><a routerLink="/trips">Nos trajets</a></li>
+          <li><a routerLink="/auth/register">Créer un compte</a></li>
+          <li><a routerLink="/auth/login">Se connecter</a></li>
+        </ul>
+      </div>
+
+      <!-- Légal -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Légal</h4>
+        <ul class="footer-links">
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Politique de cookies</a></li>
+          <li><a href="#">Nous contacter</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Newsletter</h4>
+        <p class="footer-desc">Recevez nos dernières offres et actualités.</p>
+
+        <div *ngIf="success" class="newsletter-success">
+          <i class="fas fa-check-circle"></i> Inscription confirmée !
+        </div>
+
+        <div *ngIf="!success" class="newsletter">
+          <input
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Votre adresse email"
+            class="newsletter-input"
+            (keyup.enter)="subscribe()"
+          >
+          <p *ngIf="error" class="newsletter-error">{{ error }}</p>
+          <button class="newsletter-btn" (click)="subscribe()" [disabled]="loading">
+            {{ loading ? '...' : "S'abonner" }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Donkoun. Tous droits réservés.</p>
+      <p class="footer-tagline">Livraison collaborative & internationale</p>
+    </div>
+
+  </div>
+</footer>

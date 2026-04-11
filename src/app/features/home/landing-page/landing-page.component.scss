@@ -1,0 +1,39 @@
+main {
+  background: var(--light, #f5f6fa);
+}
+
+/* Parcels Section */
+.parcels {
+  padding: 80px 0 40px;
+  background: #fff;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin-bottom: 12px;
+}
+.section-header p {
+  color: #636e72;
+}
+
+.parcels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .parcels {
+    padding: 40px 0 20px;
+  }
+  .parcels-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

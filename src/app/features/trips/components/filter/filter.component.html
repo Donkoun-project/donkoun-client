@@ -1,0 +1,57 @@
+<div class="filter-panel">
+  <h3 class="filter-title">Filtres</h3>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+
+    <div class="filter-field">
+      <label class="filter-label">Départ</label>
+      <input type="text" formControlName="origin" placeholder="Ex : Paris" class="filter-input">
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label">Destination</label>
+      <input type="text" formControlName="destination" placeholder="Ex : Dakar" class="filter-input">
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label">Date de départ</label>
+      <div class="date-input-wrapper">
+        <i class="fas fa-calendar-alt date-icon"></i>
+        <input
+          [type]="focusedFrom ? 'date' : 'text'"
+          formControlName="dateFrom"
+          placeholder="Sélectionner une date"
+          class="filter-input filter-input--date"
+          (focus)="focusedFrom = true"
+          (blur)="focusedFrom = !!filterForm.get('dateFrom')?.value">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label">Date d'arrivée</label>
+      <div class="date-input-wrapper">
+        <i class="fas fa-calendar-check date-icon date-icon--arrival"></i>
+        <input
+          [type]="focusedTo ? 'date' : 'text'"
+          formControlName="dateTo"
+          placeholder="Sélectionner une date"
+          class="filter-input filter-input--date"
+          (focus)="focusedTo = true"
+          (blur)="focusedTo = !!filterForm.get('dateTo')?.value">
+      </div>
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label">Type de transport</label>
+      <select formControlName="transportType" class="filter-input">
+        <option *ngFor="let t of transportTypes" [value]="t.value">{{ t.label }}</option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button type="button" (click)="reset()" class="btn-reset">Réinitialiser</button>
+      <button type="submit" class="btn-apply">Rechercher</button>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,108 @@
+<!-- Overlay -->
+<div
+  class="fixed inset-0 bg-black bg-opacity-40"
+  style="z-index: 200; animation: fadeOverlay 0.25s ease-out"
+  (click)="closePanel()">
+</div>
+
+<!-- Panneau -->
+<div class="fixed top-0 right-0 h-full w-full max-w-md bg-white flex flex-col"
+     style="z-index: 201; box-shadow: -2px 0 40px rgba(0,0,0,0.12); animation: slideIn 0.25s cubic-bezier(.4,0,.2,1)">
+
+  <!-- Header -->
+  <div class="detail-header">
+    <button class="close-btn" (click)="closePanel()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <p class="header-eyebrow">{{ trip?.transportType }} · {{ trip?.transportCompany }}</p>
+
+    <div class="detail-route">
+      <div class="detail-city">
+        <span class="city-name">{{ trip?.departureCity | capitalize }}</span>
+        <span class="city-country">{{ trip?.departureCountry | capitalize }}</span>
+      </div>
+      <div class="route-track">
+        <span class="route-dot"></span>
+        <span class="route-line"></span>
+        <i class="fas fa-plane route-plane"></i>
+        <span class="route-line"></span>
+        <span class="route-dot"></span>
+      </div>
+      <div class="detail-city detail-city--right">
+        <span class="city-name">{{ trip?.arrivalCity | capitalize }}</span>
+        <span class="city-country">{{ trip?.arrivalCountry | capitalize }}</span>
+      </div>
+    </div>
+
+    <div class="deadline-banner">
+      <i class="fas fa-hourglass-half deadline-icon"></i>
+      <span>Réservation avant le <strong>{{ trip?.reservationDeadline | dateFormat }}</strong></span>
+    </div>
+  </div>
+
+  <!-- Corps -->
+  <div class="detail-body">
+
+    <div class="detail-section">
+      <p class="section-title">Dates du trajet</p>
+      <div class="dates-row">
+        <div class="date-block">
+          <span class="date-label">Départ</span>
+          <span class="date-value">{{ trip?.departureDate | dateFormat }}</span>
+        </div>
+        <i class="fas fa-arrow-right dates-arrow"></i>
+        <div class="date-block date-block--right">
+          <span class="date-label">Arrivée</span>
+          <span class="date-value">{{ trip?.arrivalDate | dateFormat }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="detail-section price-section">
+      <div class="price-main">
+        <span class="price-amount">{{ trip?.pricePerKg }}</span>
+        <span class="price-currency">{{ trip?.currency }}</span>
+        <span class="price-per">/ kg</span>
+      </div>
+      <div class="price-meta">
+        <span class="meta-chip">{{ trip?.availableQuantity }} {{ trip?.unit }} dispo.</span>
+        <span class="meta-chip">min. {{ trip?.minReservation }} {{ trip?.unit }}</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="trip?.pickupLocation || trip?.deliveryLocation">
+      <div class="section-divider"></div>
+      <div class="detail-section">
+        <p class="section-title">Lieux</p>
+        <div class="lieu-list">
+          <div class="lieu-row" *ngIf="trip?.pickupLocation">
+            <span class="lieu-label">Retrait</span>
+            <span class="lieu-value">{{ trip?.pickupLocation }}</span>
+          </div>
+          <div class="lieu-row" *ngIf="trip?.deliveryLocation">
+            <span class="lieu-label">Livraison</span>
+            <span class="lieu-value">{{ trip?.deliveryLocation }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="trip?.message">
+      <div class="section-divider"></div>
+      <div class="detail-section">
+        <p class="section-title">Message</p>
+        <p class="message-text">{{ trip?.message }}</p>
+      </div>
+    </ng-container>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="detail-footer">
+    <button class="cta-btn">Contacter le voyageur</button>
+  </div>
+
+</div>

@@ -1,0 +1,93 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <h1 class="auth-title">Créer un compte</h1>
+    <p class="auth-sub">Rejoignez la communauté Donkoun</p>
+
+    <!-- Messages -->
+    <div *ngIf="errorMessage" class="auth-alert auth-alert--error">
+      <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="auth-alert auth-alert--success">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="field">
+        <label for="fullName">Nom complet</label>
+        <input
+          id="fullName"
+          type="text"
+          formControlName="fullName"
+          placeholder="Jean Dupont"
+          [class.field-input--error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
+        >
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="votre@email.com"
+          [class.field-input--error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        >
+      </div>
+
+      <div class="field">
+        <label for="phone">Téléphone</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="+1 555 123 4567"
+          [class.field-input--error]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
+        >
+      </div>
+
+      <div class="fields-row">
+        <div class="field">
+          <label for="password">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.field-input--error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          >
+        </div>
+        <div class="field">
+          <label for="confirmPassword">Confirmer</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            [class.field-input--error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+          >
+        </div>
+      </div>
+
+      <div
+        *ngIf="registerForm.errors?.['mismatch'] && (registerForm.get('confirmPassword')?.touched || registerForm.get('password')?.touched)"
+        class="field-error-msg"
+      >
+        Les mots de passe ne correspondent pas.
+      </div>
+
+      <button type="submit" class="auth-btn" [disabled]="loading">
+        {{ loading ? 'En cours...' : 'Créer mon compte' }}
+      </button>
+
+    </form>
+
+    <p class="auth-switch">
+      Déjà un compte ?
+      <a routerLink="/auth/login" class="auth-link">Se connecter</a>
+    </p>
+
+  </div>
+</div>

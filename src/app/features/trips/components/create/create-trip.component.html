@@ -1,0 +1,159 @@
+<div class="form-page">
+
+  <!-- Header -->
+  <div class="form-header">
+    <div>
+      <h1 class="form-title">{{ isEditMode ? 'Modifier le trajet' : 'Nouveau trajet' }}</h1>
+      <p class="form-sub">{{ isEditMode ? 'Mettez à jour les informations du trajet' : 'Renseignez les informations de votre trajet' }}</p>
+    </div>
+    <button type="button" class="btn-secondary" routerLink="/trips/allpackage">
+      <i class="fas fa-arrow-left"></i> Retour
+    </button>
+  </div>
+
+  <form [formGroup]="tripForm" (ngSubmit)="onSubmit()" class="form-body">
+
+    <!-- Messages -->
+    <div *ngIf="isSuccess" class="form-alert form-alert--success">
+      <i class="fas fa-check-circle"></i>
+      {{ isEditMode ? 'Trajet modifié avec succès !' : 'Trajet créé avec succès !' }}
+    </div>
+    <div *ngIf="isError" class="form-alert form-alert--error">
+      <i class="fas fa-exclamation-circle"></i> {{ errorMsg }}
+    </div>
+
+    <!-- Section 1 : Itinéraire -->
+    <div class="form-section">
+      <h2 class="section-title"><i class="fas fa-route section-icon"></i> Itinéraire</h2>
+      <div class="route-grid">
+        <div class="route-col">
+          <p class="route-label">Départ</p>
+          <div class="field">
+            <label>Pays <span class="required">*</span></label>
+            <input type="text" formControlName="departureCountry" placeholder="Ex. France">
+          </div>
+          <div class="field">
+            <label>Ville <span class="required">*</span></label>
+            <input type="text" formControlName="departureCity" placeholder="Ex. Paris">
+          </div>
+          <div class="field">
+            <label>Lieu de prise en charge <span class="required">*</span></label>
+            <input type="text" formControlName="pickupLocation" placeholder="Adresse de collecte">
+          </div>
+        </div>
+
+        <div class="route-arrow">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <div class="route-col">
+          <p class="route-label">Arrivée</p>
+          <div class="field">
+            <label>Pays <span class="required">*</span></label>
+            <input type="text" formControlName="arrivalCountry" placeholder="Ex. Guinée">
+          </div>
+          <div class="field">
+            <label>Ville <span class="required">*</span></label>
+            <input type="text" formControlName="arrivalCity" placeholder="Ex. Conakry">
+          </div>
+          <div class="field">
+            <label>Lieu de livraison <span class="required">*</span></label>
+            <input type="text" formControlName="deliveryLocation" placeholder="Adresse de livraison">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 : Dates -->
+    <div class="form-section">
+      <h2 class="section-title"><i class="fas fa-calendar-alt section-icon"></i> Dates</h2>
+      <div class="fields-grid fields-grid--3">
+        <div class="field">
+          <label>Date de départ <span class="required">*</span></label>
+          <input type="datetime-local" formControlName="departureDate">
+          <span *ngIf="tripForm.errors?.['arrivalBeforeDeparture']" class="field-error">
+            La date d'arrivée doit être après le départ.
+          </span>
+        </div>
+        <div class="field">
+          <label>Date d'arrivée <span class="required">*</span></label>
+          <input type="datetime-local" formControlName="arrivalDate">
+        </div>
+        <div class="field">
+          <label>Limite de réservation <span class="required">*</span></label>
+          <input type="datetime-local" formControlName="reservationDeadline">
+          <span *ngIf="tripForm.errors?.['reservationDeadlineAfterDeparture']" class="field-error">
+            Doit être avant la date de départ.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 : Capacité & tarif -->
+    <div class="form-section">
+      <h2 class="section-title"><i class="fas fa-box section-icon"></i> Capacité & tarif</h2>
+      <div class="fields-grid fields-grid--5">
+        <div class="field">
+          <label>Unité <span class="required">*</span></label>
+          <select formControlName="unit">
+            <option value="">Sélectionner</option>
+            <option *ngFor="let u of availableUnits" [value]="u">{{ u }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Quantité disponible <span class="required">*</span></label>
+          <input type="number" formControlName="availableQuantity" min="1" placeholder="0">
+        </div>
+        <div class="field">
+          <label>Min. réservation <span class="required">*</span></label>
+          <input type="number" formControlName="minReservation" min="1" placeholder="0">
+          <span *ngIf="tripForm.errors?.['minReservationNotInferior']" class="field-error">
+            Doit être inférieur à la quantité disponible.
+          </span>
+        </div>
+        <div class="field">
+          <label>Prix / unité <span class="required">*</span></label>
+          <input type="number" formControlName="pricePerKg" step="0.01" min="0" placeholder="0.00">
+        </div>
+        <div class="field">
+          <label>Devise <span class="required">*</span></label>
+          <select formControlName="currency">
+            <option value="">Sélectionner</option>
+            <option *ngFor="let c of availableCurrencies" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4 : Transporteur -->
+    <div class="form-section">
+      <h2 class="section-title"><i class="fas fa-truck section-icon"></i> Transporteur</h2>
+      <div class="fields-grid fields-grid--3">
+        <div class="field">
+          <label>Type de transport <span class="required">*</span></label>
+          <select formControlName="transportType">
+            <option value="">Sélectionner</option>
+            <option *ngFor="let t of availableTransportTypes" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Compagnie <span class="required">*</span></label>
+          <input type="text" formControlName="transportCompany" placeholder="Ex. Air France">
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <input type="text" formControlName="message" placeholder="Message optionnel pour le client">
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-footer">
+      <button type="button" class="btn-secondary" routerLink="/trips/allpackage">Annuler</button>
+      <button type="submit" class="btn-primary">
+        {{ isEditMode ? 'Enregistrer les modifications' : 'Créer le trajet' }}
+      </button>
+    </div>
+
+  </form>
+</div>

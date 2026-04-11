@@ -1,0 +1,60 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <h1 class="auth-title">Connexion</h1>
+    <p class="auth-sub">Accédez à votre espace personnel</p>
+
+    <!-- Messages -->
+    <div *ngIf="errorMessage" class="auth-alert auth-alert--error">
+      <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="auth-alert auth-alert--success">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="votre@email.com"
+          [class.field-input--error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          [class.field-input--error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+      </div>
+
+      <div class="auth-row">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="rememberMe">
+          <span>Se souvenir de moi</span>
+        </label>
+        <a href="#" class="auth-link">Mot de passe oublié ?</a>
+      </div>
+
+      <button type="submit" class="auth-btn" [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Connexion...' : 'Se connecter' }}
+      </button>
+
+    </form>
+
+    <p class="auth-switch">
+      Pas encore de compte ?
+      <a routerLink="/auth/register" class="auth-link">Créer un compte</a>
+    </p>
+
+  </div>
+</div>

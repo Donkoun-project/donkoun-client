@@ -1,0 +1,55 @@
+<header class="site-header">
+  <nav class="nav-inner">
+
+    <!-- Logo -->
+    <a routerLink="/" class="nav-logo">Donkoun</a>
+
+    <!-- Liens centraux -->
+    <div class="nav-links">
+      <a routerLink="/" class="nav-link">Accueil</a>
+      <a routerLink="/trips" class="nav-link">Nos trajets</a>
+    </div>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <ng-container *ngIf="!isAuthenticated">
+        <a routerLink="/auth/login" class="btn-secondary">Connexion</a>
+        <a routerLink="/auth/register" class="btn-primary">Inscription</a>
+      </ng-container>
+
+      <ng-container *ngIf="isAuthenticated">
+        <div class="account-wrapper" tabindex="0">
+          <button class="account-btn" (click)="toggleDropdown()" [attr.aria-expanded]="showDropdown">
+            <div class="account-avatar">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4" stroke-width="2"/>
+                <path d="M4 20c0-4 8-4 8-4s8 0 8 4" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="account-label">Mon compte</span>
+            <svg class="chevron" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <div *ngIf="showDropdown" class="dropdown" (click)="$event.stopPropagation()">
+            <a routerLink="/dashboard" class="dropdown-item" (click)="closeDropdown()">
+              <i class="fas fa-chart-bar dropdown-icon"></i> Dashboard
+            </a>
+            <a routerLink="/trips/allpackage" class="dropdown-item" (click)="closeDropdown()">
+              <i class="fas fa-box dropdown-icon"></i> Mes colis
+            </a>
+            <a routerLink="/trips/monProfil" class="dropdown-item" (click)="closeDropdown()">
+              <i class="fas fa-user dropdown-icon"></i> Mon profil
+            </a>
+            <div class="dropdown-divider"></div>
+            <button (click)="logout()" class="dropdown-item dropdown-item--danger">
+              <i class="fas fa-sign-out-alt dropdown-icon"></i> Déconnexion
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </nav>
+</header>

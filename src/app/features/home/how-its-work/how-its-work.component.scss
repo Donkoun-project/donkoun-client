@@ -1,0 +1,83 @@
+.section {
+  padding: 100px 0;
+  background: var(--light, #f5f6fa);
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-title h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin-bottom: 15px;
+}
+.section-title p {
+  color: #636e72;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  justify-items: center;
+}
+.step-card {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 38px 0 rgba(93, 63, 211, 0.06), 0 1.5px 9px 0 rgba(0,0,0,.02);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 410px;
+  text-align: center;
+}
+.step-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+.step-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f5f6fa;
+  position: relative;
+  font-size: 2rem;
+}
+.step-card:nth-child(1) .step-icon {
+  background: rgba(108, 92, 231, 0.1);
+  color: #6c5ce7;
+}
+.step-card:nth-child(2) .step-icon {
+  background: rgba(253, 121, 168, 0.1);
+  color: #fd79a8;
+}
+.step-card:nth-child(3) .step-icon {
+  background: rgba(0, 206, 201, 0.1);
+  color: #00cec9;
+}
+.step-card h3 {
+  margin: 20px 0 15px;
+  color: #2d3436;
+}
+.step-card p {
+  color: #636e72;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .step-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .section {
+    padding: 60px 0;
+  }
+}

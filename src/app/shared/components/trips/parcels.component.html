@@ -1,0 +1,59 @@
+<div class="parcel-card">
+  <!-- Route -->
+  <div class="parcel-route">
+    <div class="route-point">
+      <div class="route-city">{{ trip.departureCity | capitalize }}</div>
+      <div class="route-country">{{ trip.departureCountry | capitalize }}</div>
+    </div>
+    <div class="route-arrow">
+      <div class="route-line"></div>
+      <i class="fas fa-plane route-plane"></i>
+      <div class="route-line"></div>
+    </div>
+    <div class="route-point route-point--right">
+      <div class="route-city">{{ trip.arrivalCity | capitalize }}</div>
+      <div class="route-country">{{ trip.arrivalCountry | capitalize }}</div>
+    </div>
+  </div>
+
+  <!-- Détails -->
+  <div class="parcel-details">
+    <div class="detail-row">
+      <div class="detail-item">
+        <span class="detail-label">Départ</span>
+        <span class="detail-value">{{ trip.departureDate | dateFormat }}</span>
+      </div>
+      <div class="detail-divider"></div>
+      <div class="detail-item detail-item--right">
+        <span class="detail-label">Arrivée</span>
+        <span class="detail-value">{{ trip.arrivalDate | dateFormat }}</span>
+      </div>
+    </div>
+
+    <div class="detail-separator"></div>
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <span class="detail-label">Prix / kg</span>
+        <span class="detail-value detail-value--accent">{{ trip.pricePerKg }} {{ trip.currency }}</span>
+      </div>
+      <div class="detail-divider"></div>
+      <div class="detail-item detail-item--right">
+        <span class="detail-label">Dispo.</span>
+        <span class="detail-value">{{ trip.availableQuantity }} {{ trip.unit }}</span>
+      </div>
+    </div>
+
+    <div class="parcel-footer">
+      <span class="transport-badge">{{ trip.transportType }}</span>
+      <div class="deadline">
+        <i class="fas fa-clock deadline-icon"></i>
+        {{ trip.reservationDeadline | dateFormat }}
+      </div>
+    </div>
+
+    <a href="#" (click)="openDetails(); $event.preventDefault()" class="details-btn">
+      Voir les détails
+    </a>
+  </div>
+</div>

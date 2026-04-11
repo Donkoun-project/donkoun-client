@@ -1,0 +1,160 @@
+<div class="pkg-page">
+
+  <!-- Header -->
+  <div class="pkg-header">
+    <div>
+      <h1 class="pkg-title">Mes trajets</h1>
+      <p class="pkg-sub">Gérez et suivez tous vos trajets</p>
+    </div>
+    <button routerLink="/trips/create" class="btn-primary">
+      <i class="fas fa-plus"></i> Nouveau trajet
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-panel">
+    <form (ngSubmit)="applyFilters()" class="filter-form">
+      <div class="filter-fields">
+        <div class="filter-field">
+          <label>Départ</label>
+          <div class="input-wrap">
+            <i class="fas fa-map-marker-alt input-icon"></i>
+            <input type="text" [(ngModel)]="filters.departure" name="departure" placeholder="Ville de départ">
+          </div>
+        </div>
+        <div class="filter-field">
+          <label>Destination</label>
+          <div class="input-wrap">
+            <i class="fas fa-map-marker input-icon"></i>
+            <input type="text" [(ngModel)]="filters.destination" name="destination" placeholder="Ville d'arrivée">
+          </div>
+        </div>
+        <div class="filter-field">
+          <label>Statut</label>
+          <select [(ngModel)]="filters.status" name="status">
+            <option value="">Tous</option>
+            <option value="PENDING">En attente</option>
+            <option value="NO_VALIDATE">Non validé</option>
+            <option value="VALIDATE">Validé</option>
+            <option value="CLOSED_STATUS">Fermé</option>
+            <option value="REJECTED_STATUS">Rejeté</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Date</label>
+          <input type="date" [(ngModel)]="filters.date" name="date">
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button type="submit" class="btn-primary btn-sm">
+          <i class="fas fa-search"></i> Filtrer
+        </button>
+        <button type="button" class="btn-secondary btn-sm" (click)="filters = {departure:'',destination:'',status:'',date:''}; applyFilters()">
+          Réinitialiser
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="state-box">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!isLoading && error" class="state-box">
+    <div class="alert alert--error"><i class="fas fa-exclamation-circle"></i> {{ error }}</div>
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!isLoading && !error" class="table-panel">
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Départ</th>
+            <th>Destination</th>
+            <th>Statut</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trip of pagedParcels">
+            <td class="td-code">{{ trip.code }}</td>
+            <td>{{ trip.departureCity | capitalize }}</td>
+            <td>{{ trip.arrivalCity | capitalize }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="'status-' + (trip.status || 'unknown').toLowerCase()">
+                {{ statusLabels[trip.status] || trip.status }}
+              </span>
+            </td>
+            <td class="td-date">{{ trip.departureDate | date: 'dd/MM/yyyy' }}</td>
+            <td class="td-actions">
+              <div class="dropdown-action-parent action-wrap">
+                <button class="action-btn" (click)="toggleDropdown(trip, $event)" title="Actions">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div *ngIf="isDropdownOpen(trip)" class="action-menu" (click)="$event.stopPropagation()">
+                  <button class="action-item" (click)="openDetails(trip)">
+                    <i class="fas fa-eye"></i> Voir
+                  </button>
+                  <button class="action-item" (click)="editTrip(trip)">
+                    <i class="fas fa-pen"></i> Modifier
+                  </button>
+                  <div class="action-divider"></div>
+                  <button class="action-item action-item--danger" (click)="deleteParcel(trip)">
+                    <i class="fas fa-trash"></i> Supprimer
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="pagedParcels.length === 0">
+            <td colspan="6" class="td-empty">
+              <i class="fas fa-box-open empty-icon"></i>
+              <p>Aucun trajet trouvé</p>
+              <button (click)="router.navigate(['/trips/create'])" class="btn-primary btn-sm" style="margin-top:.75rem">
+                Créer un trajet
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer table -->
+    <div class="table-footer">
+      <span class="results-info">
+        {{ totalResults === 0 ? '0 résultat' : startItem + ' – ' + endItem + ' sur ' + totalResults }}
+      </span>
+      <div class="pagination">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="page-btn">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button
+          *ngFor="let page of pages"
+          (click)="goToPage(page)"
+          [class.active]="currentPage === page"
+          class="page-btn">
+          {{ page }}
+        </button>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-btn">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Détail offcanvas -->
+  <app-parcel-detail
+    *ngIf="showDetails"
+    [trip]="selectedTrip"
+    [showStatus]="true"
+    (close)="closeDetails()">
+  </app-parcel-detail>
+
+</div>

@@ -1,0 +1,193 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  height: 64px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+// ── Logo ──────────────────────────────────────────────
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #111827;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+// ── Liens ─────────────────────────────────────────────
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+
+  &:hover {
+    color: #111827;
+    background: #f4f4f5;
+  }
+}
+
+// ── Actions ───────────────────────────────────────────
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-secondary {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #374151;
+  background: #f4f4f5;
+  border: 1px solid #e9eaec;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+
+  &:hover { background: #e9eaec; }
+}
+
+.btn-primary {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #fff;
+  background: #7c3aed;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+
+  &:hover { background: #6d28d9; }
+}
+
+// ── Compte ────────────────────────────────────────────
+.account-wrapper {
+  position: relative;
+}
+
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: #fafafa;
+  border: 1px solid #e9eaec;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #f4f4f5; }
+}
+
+.account-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: #7c3aed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.account-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.chevron {
+  color: #9ca3af;
+}
+
+// ── Dropdown ──────────────────────────────────────────
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #e9eaec;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 0.4rem;
+  animation: dropdown-in 0.15s ease-out;
+  z-index: 10;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #374151;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s;
+  text-align: left;
+
+  &:hover { background: #f4f4f5; }
+
+  &--danger {
+    color: #dc2626;
+    &:hover { background: #fef2f2; }
+  }
+}
+
+.dropdown-icon {
+  font-size: 0.78rem;
+  width: 14px;
+  color: #9ca3af;
+
+  .dropdown-item--danger & { color: #fca5a5; }
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #f4f4f5;
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .account-label { display: none; }
+}

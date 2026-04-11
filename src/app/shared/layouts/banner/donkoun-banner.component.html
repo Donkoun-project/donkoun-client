@@ -1,0 +1,66 @@
+<section class="hero min-h-[80vh] flex items-center relative mt-[100px] to-white py-10 sm:py-16">
+  <div class="container hero-container mx-auto max-w-7xl w-[94%] relative z-10">
+    <div class="hero-content text-center mb-10 px-4">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-[#2d3436] leading-tight">
+        Connect. Ship. <span class="bg-gradient-to-r from-purple-600 to-pink-400 bg-clip-text text-transparent">Deliver.</span>
+      </h1>
+      <p class="subtitle text-xl md:text-2xl text-gray-500 max-w-2xl mx-auto">
+        Envoyez vos colis à l'international grâce à des voyageurs disposant d'espace dans leurs bagages, de manière économique et sécurisée.
+      </p>
+    </div>
+    <div class="hero-flex flex flex-col lg:flex-row gap-8 items-start justify-center px-2 w-full">
+      <!-- Form -->
+      <div class="search-box bg-white rounded-2xl shadow-xl px-6 sm:px-10 py-8 flex-1 min-w-[320px] max-w-xl mx-auto">
+        <form [formGroup]="filterForm" (ngSubmit)="onSearch()" class="search-form grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <div class="form-group">
+            <label class="block font-semibold text-gray-800 mb-2">Départ</label>
+            <input type="text" formControlName="origin" class="form-control w-full border border-gray-200 rounded-xl px-5 py-3 focus:ring-2 focus:ring-purple-300 focus:outline-none text-gray-700 font-medium bg-gray-50 transition" placeholder="Ville d'origine">
+          </div>
+          <div class="form-group">
+            <label class="block font-semibold text-gray-800 mb-2">Destination</label>
+            <input type="text" formControlName="destination" class="form-control w-full border border-gray-200 rounded-xl px-5 py-3 focus:ring-2 focus:ring-purple-300 focus:outline-none text-gray-700 font-medium bg-gray-50 transition" placeholder="Ville de destination">
+          </div>
+          <div class="col-span-1 sm:col-span-2">
+            <button type="submit" class="search-btn w-full bg-gradient-to-r from-[#8b79f9] to-[#a29bfe] hover:from-[#7b6ee6] hover:to-[#a29bfe] text-white font-bold rounded-xl py-3 mb-8 shadow transition text-lg">
+              Rechercher
+            </button>
+          </div>
+        </form>
+        <div class="action-buttons flex flex-row gap-4 justify-center items-center flex-nowrap">
+          <button (click)="onSendParcel()" class="btn btn-primary bg-gradient-to-r from-[#8b79f9] to-[#a29bfe] text-white font-semibold rounded-full px-8 py-3 shadow hover:from-purple-700 hover:to-purple-500 transition text-lg">Envoyer un colis</button>
+          <button (click)="onBecomeTransporter()" class="btn btn-outline border-2 border-[#8b79f9] text-[#8b79f9] rounded-full px-8 py-3 font-semibold bg-white hover:bg-purple-50 transition text-lg">Devenir transporteur</button>
+        </div>
+      </div>
+      <!-- Features alignées verticalement à droite -->
+      <div class="hero-info flex flex-col gap-6 flex-1 min-w-[300px] max-w-xl mx-auto lg:mx-0">
+        <div class="trust-badge flex items-center gap-4 bg-white rounded-2xl shadow p-6 transition hover:-translate-y-1 hover:shadow-lg">
+          <div class="badge-icon flex items-center justify-center bg-purple-100 text-2xl rounded-xl w-14 h-14">
+            <span class="text-[#a78bfa]">💰</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 text-lg mb-1">Économisez jusqu'à 70%</h4>
+            <p class="text-gray-500 text-base">Par rapport aux services d'expédition traditionnels</p>
+          </div>
+        </div>
+        <div class="trust-badge flex items-center gap-4 bg-white rounded-2xl shadow p-6 transition hover:-translate-y-1 hover:shadow-lg">
+          <div class="badge-icon flex items-center justify-center bg-blue-100 text-2xl rounded-xl w-14 h-14">
+            <span class="text-[#0ea5e9]">🌍</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 text-lg mb-1">+150 pays</h4>
+            <p class="text-gray-500 text-base">Une communauté mondiale de voyageurs</p>
+          </div>
+        </div>
+        <div class="trust-badge flex items-center gap-4 bg-white rounded-2xl shadow p-6 transition hover:-translate-y-1 hover:shadow-lg">
+          <div class="badge-icon flex items-center justify-center bg-yellow-100 text-2xl rounded-xl w-14 h-14">
+            <span class="text-[#fbbf24]">📦</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 text-lg mb-1">Solution flexible</h4>
+            <p class="text-gray-500 text-base">Pour tous types et tailles de colis</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

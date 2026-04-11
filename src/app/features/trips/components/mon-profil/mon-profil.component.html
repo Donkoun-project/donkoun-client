@@ -1,0 +1,83 @@
+<div class="profil-page">
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="state-box">
+    <div class="spinner"></div>
+    <p>Chargement du profil...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && profileForm" class="profil-inner">
+
+    <!-- Avatar + nom -->
+    <div class="profil-head">
+      <div class="avatar">
+        <span>{{ profileForm.get('fullName')?.value ? profileForm.get('fullName')?.value[0].toUpperCase() : '?' }}</span>
+      </div>
+      <div>
+        <h1 class="profil-title">{{ profileForm.get('fullName')?.value || 'Mon profil' }}</h1>
+        <p class="profil-email">{{ profileForm.get('email')?.value }}</p>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="auth-alert auth-alert--success">
+      <i class="fas fa-check-circle"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="auth-alert auth-alert--error">
+      <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profil-form">
+
+      <!-- Informations -->
+      <div class="form-section">
+        <h2 class="section-title">Informations personnelles</h2>
+        <div class="fields-grid">
+          <div class="field">
+            <label>Nom complet</label>
+            <input type="text" formControlName="fullName" placeholder="Jean Dupont" autocomplete="name">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="votre@email.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label>Téléphone <span class="field-hint">(ex: +224620000000)</span></label>
+            <input type="text" formControlName="phone" placeholder="+224620000000" autocomplete="tel">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="form-section">
+        <h2 class="section-title">Modifier le mot de passe</h2>
+        <p class="section-sub">Laissez ces champs vides si vous ne souhaitez pas changer votre mot de passe.</p>
+        <div class="fields-grid">
+          <div class="field">
+            <label>Ancien mot de passe</label>
+            <input type="password" formControlName="oldPassword" placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <div class="field">
+            <label>Nouveau mot de passe</label>
+            <input type="password" formControlName="newPassword" placeholder="••••••••" autocomplete="new-password">
+          </div>
+          <div class="field">
+            <label>Confirmer</label>
+            <input type="password" formControlName="confirmPassword" placeholder="••••••••" autocomplete="new-password">
+          </div>
+        </div>
+        <div *ngIf="profileForm.errors?.['passwordsMismatch'] && profileForm.get('confirmPassword')?.touched" class="field-error-msg">
+          Les mots de passe ne correspondent pas.
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="save-btn" [disabled]="profileForm.invalid || updating">
+          {{ updating ? 'Enregistrement...' : 'Enregistrer les modifications' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

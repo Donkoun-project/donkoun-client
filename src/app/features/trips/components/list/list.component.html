@@ -1,0 +1,56 @@
+<main class="container mx-auto px-6 pt-24 pb-12">
+  <div class="flex flex-col lg:flex-row gap-8">
+
+    <!-- Sidebar filtre -->
+    <div class="w-full lg:w-1/4">
+      <app-filter (filterChanged)="onFilterChanged($event)"></app-filter>
+    </div>
+
+    <!-- Contenu -->
+    <div class="w-full lg:w-3/4">
+
+      <!-- Loader -->
+      <div *ngIf="isLoading" class="flex justify-center items-center min-h-[200px]">
+        <div class="loader"></div>
+      </div>
+
+      <!-- Erreur -->
+      <div *ngIf="!isLoading && error" class="text-red-600 text-center p-4">
+        {{ error }}
+      </div>
+
+      <!-- Liste vide -->
+      <div *ngIf="!isLoading && !error && trips.length === 0"
+           class="flex flex-col items-center justify-center min-h-[200px] text-center text-gray-400">
+        <i class="fas fa-box-open text-4xl mb-3"></i>
+        <p class="font-medium">Aucun trajet disponible pour le moment</p>
+      </div>
+
+      <!-- Liste des cards -->
+      <div *ngIf="!isLoading && !error && trips.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <app-parcels
+          *ngFor="let trip of trips"
+          [trip]="trip"
+          (details)="openDetails($event)"
+        ></app-parcels>
+      </div>
+
+      <!-- Charger plus -->
+      <div *ngIf="!isLoading && !error && pagination?.hasNextPage" class="flex justify-center">
+        <button
+          (click)="loadMore()"
+          class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300">
+          Charger plus
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Panneau de détails — en dehors du main -->
+<app-parcel-detail
+  *ngIf="showDetails"
+  [trip]="selectedTrip"
+  [showStatus]="false"
+  (close)="closeDetails()"
+></app-parcel-detail>
