@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Dégradé_sans_nom_7-3);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Dégradé_sans_nom_7);
+      }
+
+      .cls-3 {
+        fill: url(#Dégradé_sans_nom_7-2);
+      }
+
+      .cls-5 {
+        font-family: AmsterPro-Negra, 'Amster Pro';
+        font-size: 147.34px;
+      }
+
+      .cls-4 {
+        fill: url(#Dégradé_sans_nom_7-4);
+      }
+    </style>
+    <linearGradient id="Dégradé_sans_nom_7" data-name="Dégradé sans nom 7" x1="146.81" y1="510.21" x2="337.07" y2="510.21" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="Dégradé_sans_nom_7-2" data-name="Dégradé sans nom 7" x1="127.01" y1="547.48" x2="305.08" y2="547.48" xlink:href="#Dégradé_sans_nom_7"/>
+    <linearGradient id="Dégradé_sans_nom_7-3" data-name="Dégradé sans nom 7" x1="126.55" y1="608.48" x2="235.84" y2="608.48" xlink:href="#Dégradé_sans_nom_7"/>
+    <linearGradient id="Dégradé_sans_nom_7-4" data-name="Dégradé sans nom 7" x1="126.92" y1="578.43" x2="268.23" y2="578.43" xlink:href="#Dégradé_sans_nom_7"/>
+  </defs>
+  <g>
+    <polygon class="cls-2" points="269.41 543.78 269.24 515.46 174.79 464.61 146.81 479.02 334.87 591.14 337.07 480.57 243.35 429.28 197.88 453.02 289.49 505.18 289.42 535.78 269.41 543.78"/>
+    <polygon class="cls-3" points="127.01 483.37 134.77 513.19 305.08 611.59 305.08 611.59 127.01 483.37"/>
+    <polygon class="cls-1" points="126.55 566.24 134.62 593.37 235.84 650.72 235.84 650.72 126.55 566.24"/>
+    <polygon class="cls-4" points="268.23 632.41 268.23 632.41 126.92 524.45 134.69 555.26 268.23 632.41"/>
+  </g>
+  <text class="cls-5" transform="translate(387.5 591.57)"><tspan x="0" y="0">donKoun</tspan></text>
+</svg>

@@ -21,12 +21,16 @@
 }
 
 .nav-logo {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #5B4FE8;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -0.02em;
   flex-shrink: 0;
+}
+
+.logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {

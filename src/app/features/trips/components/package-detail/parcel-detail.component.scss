@@ -180,16 +180,38 @@
   flex-shrink: 0;
 }
 
+.wa-toast {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #DCFCE7;
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 9px;
+  margin-bottom: 10px;
+  animation: fadeOverlay 0.2s ease;
+}
+
+
 .cta-btn {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
   padding: 0.85rem;
   font-size: 0.9rem;
   font-weight: 700;
   color: #fff;
-  background: #7c3aed;
+  background: #25D366;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: background 0.15s;
-  &:hover { background: #6d28d9; }
+  transition: background 0.15s, opacity 0.15s;
+  font-family: inherit;
+
+  &:hover { background: #1ebe5d; }
+  &:disabled { opacity: 0.7; cursor: default; }
 }

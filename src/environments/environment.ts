@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:8081"
+  baseUrl: "http://localhost:8081",
+  whatsappGroupUrl: "https://chat.whatsapp.com/BecWmlNvrweLL4Y3nPZZHA?mode=gi_t"
 };
 
 /*

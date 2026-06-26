@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITrip } from '../../models/ITrip';
+import { environment } from 'src/environments/environment';
 
 @Component({
   standalone: false,
@@ -32,6 +33,28 @@ export class ParcelDetailComponent {
 
   closePanel() {
     this.close.emit();
+  }
+
+  copied = false;
+  readonly whatsappGroupUrl = environment.whatsappGroupUrl;
+
+  copyTripInfo() {
+    if (!this.trip) return;
+
+    const msg = [
+      `👋 Bonjour, je suis intéressé(e) par ce trajet sur Donkoun :`,
+      ``,
+      `✈️ ${this.trip.departureCity} (${this.trip.departureCountry}) → ${this.trip.arrivalCity} (${this.trip.arrivalCountry})`,
+      `📅 Départ : ${new Date(this.trip.departureDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}`,
+      `📦 Disponible : ${this.trip.availableQuantity} ${this.trip.unit}`,
+      `💰 Prix : ${this.trip.pricePerKg} ${this.trip.currency} / ${this.trip.unit}`,
+      `🚢 Transport : ${this.trip.transportType} — ${this.trip.transportCompany}`,
+    ].join('\n');
+
+    navigator.clipboard.writeText(msg).then(() => {
+      this.copied = true;
+      setTimeout(() => this.copied = false, 4000);
+    }).catch(() => {});
   }
 
   getStatusLabel(status: string | undefined | null): string {
