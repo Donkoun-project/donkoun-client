@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "https://sandbox-api.donkoun.com"
+  baseUrl: "https://api.donkoun.com"
 };
