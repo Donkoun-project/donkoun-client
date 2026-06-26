@@ -1,16 +1,17 @@
 .site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  top: 0; left: 0; right: 0;
   height: 64px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #EDEDF3;
+  z-index: 50;
+  display: flex;
+  align-items: center;
 }
 
 .nav-inner {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
   height: 100%;
@@ -19,44 +20,41 @@
   gap: 2rem;
 }
 
-// ── Logo ──────────────────────────────────────────────
 .nav-logo {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #111827;
+  color: #5B4FE8;
   text-decoration: none;
   letter-spacing: -0.02em;
   flex-shrink: 0;
 }
 
-// ── Liens ─────────────────────────────────────────────
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 2px;
   flex: 1;
 }
 
 .nav-link {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #6b7280;
+  color: #6B7280;
   text-decoration: none;
-  padding: 0.4rem 0.75rem;
+  padding: 6px 12px;
   border-radius: 8px;
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.14s, background 0.14s;
 
   &:hover {
     color: #111827;
-    background: #f4f4f5;
+    background: #F5F4FF;
   }
 }
 
-// ── Actions ───────────────────────────────────────────
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -64,54 +62,54 @@
   font-size: 0.84rem;
   font-weight: 600;
   color: #374151;
-  background: #f4f4f5;
-  border: 1px solid #e9eaec;
-  padding: 0.4rem 1rem;
-  border-radius: 8px;
+  background: #F4F4F6;
+  border: 1px solid #E8E8EF;
+  padding: 8px 18px;
+  border-radius: 9px;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.14s;
 
-  &:hover { background: #e9eaec; }
+  &:hover { background: #EBEBF0; }
 }
 
 .btn-primary {
   font-size: 0.84rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
-  background: #7c3aed;
-  padding: 0.4rem 1rem;
-  border-radius: 8px;
+  background: #5B4FE8;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 9px;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.14s, box-shadow 0.14s;
 
-  &:hover { background: #6d28d9; }
+  &:hover {
+    background: #4539CC;
+    box-shadow: 0 4px 14px rgba(91,79,232,0.35);
+  }
 }
 
-// ── Compte ────────────────────────────────────────────
-.account-wrapper {
-  position: relative;
-}
+.account-wrapper { position: relative; }
 
 .account-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  background: #fafafa;
-  border: 1px solid #e9eaec;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 7px 12px;
+  background: #F4F4F6;
+  border: 1px solid #E8E8EF;
+  border-radius: 9px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.14s;
 
-  &:hover { background: #f4f4f5; }
+  &:hover { background: #EBEBF0; }
 }
 
 .account-avatar {
-  width: 26px;
-  height: 26px;
+  width: 26px; height: 26px;
   border-radius: 50%;
-  background: #ede9fe;
-  color: #7c3aed;
+  background: #EEEEFF;
+  color: #5B4FE8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,21 +122,18 @@
   color: #374151;
 }
 
-.chevron {
-  color: #9ca3af;
-}
+.chevron { color: #9CA3AF; }
 
-// ── Dropdown ──────────────────────────────────────────
 .dropdown {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   min-width: 200px;
   background: #fff;
-  border: 1px solid #e9eaec;
+  border: 1px solid #EDEDF3;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  padding: 0.4rem;
+  padding: 4px;
   animation: dropdown-in 0.15s ease-out;
   z-index: 10;
 }
@@ -151,9 +146,9 @@
 .dropdown-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 8px;
   width: 100%;
-  padding: 0.55rem 0.75rem;
+  padding: 8px 10px;
   font-size: 0.84rem;
   font-weight: 500;
   color: #374151;
@@ -165,26 +160,26 @@
   transition: background 0.12s;
   text-align: left;
 
-  &:hover { background: #f4f4f5; }
+  &:hover { background: #F5F4FF; }
 
   &--danger {
-    color: #dc2626;
-    &:hover { background: #fef2f2; }
+    color: #DC2626;
+    &:hover { background: #FEF2F2; }
   }
 }
 
 .dropdown-icon {
   font-size: 0.78rem;
   width: 14px;
-  color: #9ca3af;
+  color: #9CA3AF;
 
-  .dropdown-item--danger & { color: #fca5a5; }
+  .dropdown-item--danger & { color: #FCA5A5; }
 }
 
 .dropdown-divider {
   height: 1px;
-  background: #f4f4f5;
-  margin: 0.3rem 0;
+  background: #F0F0F5;
+  margin: 3px 0;
 }
 
 @media (max-width: 768px) {

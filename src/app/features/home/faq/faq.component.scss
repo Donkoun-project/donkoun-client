@@ -1,0 +1,135 @@
+:host {
+  --accent:      #5B4FE8;
+  --accent-pale: #F0EEFF;
+  --ink:         #0F1117;
+  --slate:       #5B6070;
+  --muted:       #9CA3AF;
+  --line:        #E8E9EF;
+}
+
+.faq {
+  background: #fff;
+  padding: 88px 0;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 94%;
+}
+
+/* ── Header ─────────────────────────────────── */
+.faq-head {
+  text-align: center;
+  margin-bottom: 52px;
+
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.022em;
+    margin: 10px 0 10px;
+    text-wrap: balance;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--slate);
+    line-height: 1.65;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ── Liste ──────────────────────────────────── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+
+  &--open {
+    background: #FAFAFE;
+  }
+}
+
+/* ── Question (bouton) ──────────────────────── */
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.15s;
+
+  .faq-item--open & {
+    color: var(--accent);
+  }
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.faq-chevron {
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform 0.22s ease, color 0.15s;
+
+  .faq-item--open & {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+}
+
+/* ── Réponse ────────────────────────────────── */
+.faq-a {
+  padding: 0 24px 20px;
+  animation: fade-in 0.18s ease;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.75;
+    margin: 0;
+    border-left: 3px solid var(--accent-pale);
+    padding-left: 16px;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .faq { padding: 64px 0; }
+
+  .faq-q { padding: 18px 18px; font-size: 0.9rem; }
+  .faq-a { padding: 0 18px 18px; }
+}
